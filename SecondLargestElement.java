@@ -52,3 +52,32 @@ class Solution {
 }
 
 // Optimal approach - O(n) O(1)
+import java.util.Arrays;
+class Solution {
+    public int secondLargestElement(int[] nums) {
+        if (nums.length < 1){
+            return -1;
+        }
+        int fmax = nums[0];
+        int smax = 0;
+        boolean sfound = false;
+        for (int i = 1; i<nums.length; i++){
+            int ele = nums[i];
+            if (ele>fmax){
+                smax = fmax;
+                fmax = ele;
+                sfound = true;
+            }
+            else if (ele<fmax){
+                if (!sfound || smax<ele){
+                    sfound = true;
+                    smax = ele;
+                }
+            }
+        }
+        if (!sfound){
+            return -1;
+        }
+        return smax;
+    }
+}
